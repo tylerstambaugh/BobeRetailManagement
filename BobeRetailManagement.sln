@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BRMDataManager", "BRMDataManager\BRMDataManager.csproj", "{53C7BBD6-1041-41C4-8753-9ED329CEFB2D}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BRMData", "BRMData\BRMData.sqlproj", "{DA5F04AB-51F5-4BBB-A6BE-865EEBDDCF08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{53C7BBD6-1041-41C4-8753-9ED329CEFB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53C7BBD6-1041-41C4-8753-9ED329CEFB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53C7BBD6-1041-41C4-8753-9ED329CEFB2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA5F04AB-51F5-4BBB-A6BE-865EEBDDCF08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA5F04AB-51F5-4BBB-A6BE-865EEBDDCF08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA5F04AB-51F5-4BBB-A6BE-865EEBDDCF08}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DA5F04AB-51F5-4BBB-A6BE-865EEBDDCF08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA5F04AB-51F5-4BBB-A6BE-865EEBDDCF08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA5F04AB-51F5-4BBB-A6BE-865EEBDDCF08}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
