@@ -8,5 +8,9 @@ namespace BRMDesktopUI.ViewModels
 {
     public class ShellViewModel
     {
+
+        public ShellViewModel()
+        {   
+        }
     }
 }
