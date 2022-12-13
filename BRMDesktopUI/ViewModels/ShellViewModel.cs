@@ -1,16 +1,21 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Caliburn.Micro;
+//using DocumentFormat.OpenXml.Bibliography;
 
 namespace BRMDesktopUI.ViewModels
 {
-    public class ShellViewModel
+    public class ShellViewModel : Conductor<object>
     {
-
-        public ShellViewModel()
+        private LoginViewModel _loginVM;
+        public ShellViewModel(LoginViewModel loginVM)
         {   
+            _loginVM= loginVM;
+            ActivateItemAsync(_loginVM);
         }
     }
 }
