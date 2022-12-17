@@ -32,10 +32,12 @@ namespace BRMDesktopUI
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<IAPIHelper, APIHelper>();
 
             _container
                 .PerRequest<ICalculations, Calculations>();
+
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)

@@ -1,8 +1,10 @@
-﻿using Caliburn.Micro;
+﻿using BRMDesktopUI.Helpers;
+using Caliburn.Micro;
 using DocumentFormat.OpenXml.Presentation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +14,12 @@ namespace BRMDesktopUI.ViewModels
     {
         private string _userName = "";
         private string _password;
+        private IAPIHelper _apiHelper;
+
+        public LoginViewModel(IAPIHelper apiHelper)
+        {
+            _apiHelper = apiHelper;
+        }
         public string UserName { 
             get { return _userName;  }
             set 
@@ -21,7 +29,6 @@ namespace BRMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => CanLogIn);
             }
         }
-
         
         public string Password
         {
@@ -46,9 +53,16 @@ namespace BRMDesktopUI.ViewModels
             }
         }
 
-        public void LogIn(string userName, string password)
+        public async Task LogIn()
         {
-            Console.WriteLine();
+            try
+            {
+                var result = await _apiHelper.Authenticate(UserName, Password);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
 
