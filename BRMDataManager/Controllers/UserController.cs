@@ -1,24 +1,25 @@
 ﻿using BRMDataManager.Library.DataAccess;
+using BRMDataManager.Library.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace BRMDataManager.Controllers
 {
 
     [Authorize]
-    [RoutePrefix("api/User")]
-    public class UserController : Controller
+    public class UserController : ApiController
     {
 
-        // GET: User/Details/5
-        public ActionResult GetById(string id)
+        public List<UserModel> GetById()
         {
-            UserData
+            string userId = RequestContext.Principal.Identity.GetUserId();
+            UserData data = new UserData();
 
-            return View();
+            return data.GetUserById(userId);
         }
 
     }
