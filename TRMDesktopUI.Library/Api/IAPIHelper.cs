@@ -1,7 +1,8 @@
-﻿using BRMDesktopUI.Models;
+﻿using BRMDesktopUI.Library.Models;
 using System.Threading.Tasks;
 
-namespace BRMDesktopUI.Helpers
+
+namespace BRMDesktopUI.Library.Api
 {
     public interface IAPIHelper
     {

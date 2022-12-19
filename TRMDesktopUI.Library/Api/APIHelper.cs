@@ -1,4 +1,4 @@
-﻿using BRMDesktopUI.Models;
+﻿using BRMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,8 +7,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using TRMDesktopUI.Library.Models;
 
-namespace BRMDesktopUI.Helpers
+namespace BRMDesktopUI.Library.Api
 {
     public class APIHelper : IAPIHelper
     {
@@ -24,10 +25,10 @@ namespace BRMDesktopUI.Helpers
             string api = ConfigurationManager.AppSettings["api"];
 
             apiClient = new HttpClient();
+            apiClient.BaseAddress = new Uri(api);
             apiClient.DefaultRequestHeaders.Accept.Clear();
             apiClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            apiClient.BaseAddress = new Uri(api);
         }
 
         public async Task<AuthenticatedUser> Authenticate(string username, string password)
@@ -45,6 +46,28 @@ namespace BRMDesktopUI.Helpers
                 {
                     var result = await response.Content.ReadAsAsync<AuthenticatedUser>();
                     return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        public async Task GetLoggedInUserInfo(string token)
+        {
+            apiClient.DefaultRequestHeaders.Clear();
+            apiClient.DefaultRequestHeaders.Accept.Clear();
+            apiClient.DefaultRequestHeaders.Accept
+                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            apiClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+
+            using (HttpResponseMessage response = await apiClient.GetAsync("/User"))
+            {
+                if(response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<LoggedInUserModel>();
+
                 }
                 else
                 {
