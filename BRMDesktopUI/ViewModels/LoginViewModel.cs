@@ -1,12 +1,8 @@
-﻿using BRMDesktopUI.Helpers;
+﻿
 using Caliburn.Micro;
-using DocumentFormat.OpenXml.Presentation;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
+using BRMDesktopUI.Library.Api;
 
 namespace BRMDesktopUI.ViewModels
 {
@@ -85,6 +81,8 @@ namespace BRMDesktopUI.ViewModels
             {
                 ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
+
+                //capture more info about user
             }
             catch (Exception ex)
             {

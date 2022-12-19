@@ -1,4 +1,5 @@
 ﻿using BRMDesktopUI.Helpers;
+using BRMDesktopUI.Library.Api;
 using BRMDesktopUI.ViewModels;
 using Caliburn.Micro;
 using System;
@@ -34,6 +35,7 @@ namespace BRMDesktopUI
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
                 .Singleton<IAPIHelper, APIHelper>();
+            
 
             _container
                 .PerRequest<ICalculations, Calculations>();
