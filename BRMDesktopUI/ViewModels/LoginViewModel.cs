@@ -83,6 +83,7 @@ namespace BRMDesktopUI.ViewModels
                 var result = await _apiHelper.Authenticate(UserName, Password);
 
                 //capture more info about user
+                await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
             }
             catch (Exception ex)
             {
