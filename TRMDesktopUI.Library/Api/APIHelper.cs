@@ -14,10 +14,12 @@ namespace BRMDesktopUI.Library.Api
     public class APIHelper : IAPIHelper
     {
         private HttpClient apiClient;
+        private ILoggedInUserModel _loggedInUser;
 
-        public APIHelper()
+        public APIHelper(ILoggedInUserModel loggedInUser)
         {
             InitializeClient();
+            _loggedInUser = loggedInUser;
         }
 
         private void InitializeClient()
@@ -62,12 +64,17 @@ namespace BRMDesktopUI.Library.Api
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
             apiClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
 
-            using (HttpResponseMessage response = await apiClient.GetAsync("/User"))
+            using (HttpResponseMessage response = await apiClient.GetAsync("/api/User"))
             {
                 if(response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsAsync<LoggedInUserModel>();
-
+                    _loggedInUser.CreatedDate = result.CreatedDate;
+                    _loggedInUser.EmailAddress = result.EmailAddress;
+                    _loggedInUser.FirstName = result.FirstName;
+                    _loggedInUser.LastName = result.LastName;
+                    _loggedInUser.Id = result.Id;
+                    _loggedInUser.Token = token;
                 }
                 else
                 {
