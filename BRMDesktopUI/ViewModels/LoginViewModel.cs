@@ -50,8 +50,7 @@ namespace BRMDesktopUI.ViewModels
                 }
                 return output;
             }
-        }
-                
+        }                
 
         public string ErrorMessage
         {
@@ -90,7 +89,5 @@ namespace BRMDesktopUI.ViewModels
                 ErrorMessage = ex.Message;
             }
         }
-
-
     }
 }
