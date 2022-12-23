@@ -11,7 +11,7 @@ namespace BRMDesktopUI.ViewModels
     public class SalesViewModel : Screen
     {
         private BindingList<string> _products;
-        private string _itemQuantity;
+        private int _itemQuantity;
         private BindingList<string> _cart;
 
         public BindingList<string> Products
@@ -24,7 +24,7 @@ namespace BRMDesktopUI.ViewModels
             }
         }
 
-        public string ItemQuantity
+        public int ItemQuantity
         {
             get { return _itemQuantity; }
             set
@@ -94,7 +94,9 @@ namespace BRMDesktopUI.ViewModels
             {
                 bool output = false;
 
-                //make sure something is selected
+                //if (_cart.Count > 0)
+                //    output = true;
+
                 return output;
             }
         }
@@ -112,7 +114,9 @@ namespace BRMDesktopUI.ViewModels
             {
                 bool output = false;
 
-                //make sure something is in the cart
+                //if (_cart.Count > 0)
+                //    output = true;
+
                 return output;
             }
         }
