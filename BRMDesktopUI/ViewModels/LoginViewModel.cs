@@ -3,6 +3,7 @@ using Caliburn.Micro;
 using System;
 using System.Threading.Tasks;
 using BRMDesktopUI.Library.Api;
+using BRMDesktopUI.EventModels;
 
 namespace BRMDesktopUI.ViewModels
 {
@@ -12,10 +13,12 @@ namespace BRMDesktopUI.ViewModels
         private string _password;
         private string _errorMessage;
         private IAPIHelper _apiHelper;
+        private IEventAggregator _events;
 
-        public LoginViewModel(IAPIHelper apiHelper)
+        public LoginViewModel(IAPIHelper apiHelper, IEventAggregator events)
         {
             _apiHelper = apiHelper;
+            _events = events;
         }
 
         public string UserName { 
@@ -83,6 +86,9 @@ namespace BRMDesktopUI.ViewModels
 
                 //capture more info about user
                 await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
+
+                await _events.PublishOnUIThreadAsync(new LogOnEvent());
+
             }
             catch (Exception ex)
             {
