@@ -1,4 +1,5 @@
 ﻿using BRMDesktopUI.Library.Models;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 
@@ -8,5 +9,9 @@ namespace BRMDesktopUI.Library.Api
     {
         Task<AuthenticatedUser> Authenticate(string username, string password);
         Task GetLoggedInUserInfo(string token);
+
+        HttpClient ApiClient { get; }
+
+
     }
 }
