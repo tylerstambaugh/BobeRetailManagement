@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,11 @@ namespace BRMDesktopUI.ViewModels
     {
 
         IProductEndpoint _productEndpoint;
+        private BindingList<ProductModel> _products;
+        private ProductModel _selectedProduct;
+        private BindingList<CartItemModel> _cart = new BindingList<CartItemModel>();
+        private int _itemQuantity;
+
         public SalesViewModel(IProductEndpoint productEndpoint)
         {
             _productEndpoint = productEndpoint;
@@ -33,7 +39,7 @@ namespace BRMDesktopUI.ViewModels
         }
 
 
-        private BindingList<ProductModel> _products;     
+            
         public BindingList<ProductModel> Products
         {
             get { return _products; }
@@ -46,7 +52,18 @@ namespace BRMDesktopUI.ViewModels
 
 
 
-        private int _itemQuantity;
+        public ProductModel SelectedProduct
+        {
+            get { return _selectedProduct; }
+            set 
+            { 
+                _selectedProduct = value;
+                NotifyOfPropertyChange(() => SelectedProduct);
+                NotifyOfPropertyChange(() => CanAddToCart);
+            }
+        }
+
+
         public int ItemQuantity
         {
             get { return _itemQuantity; }
@@ -54,19 +71,18 @@ namespace BRMDesktopUI.ViewModels
             {
                 _itemQuantity = value;
                 NotifyOfPropertyChange(() => ItemQuantity);
+                NotifyOfPropertyChange(() => CanAddToCart);
             }
         }
 
 
-        private BindingList<ProductModel> _cart;
-        public BindingList<ProductModel> Cart
+        public BindingList<CartItemModel> Cart
         {
             get { return _cart; }
             set
             {
                 _cart = value;
                 NotifyOfPropertyChange(() => Cart);
-
             }
         }
 
@@ -103,14 +119,25 @@ namespace BRMDesktopUI.ViewModels
 
                 //Make sure something is selected
                 //Make sure there is an item quantity
-
+                if (ItemQuantity > 0 && 
+                    SelectedProduct?.QuantityInStock >= ItemQuantity)
+                    output = true;
                 return output;
             }
         }
 
         public void AddToCart()
         {
+            if(CanAddToCart)
+            {
+                CartItemModel item = new CartItemModel
+                {
+                    Product = SelectedProduct,
+                    QuantityInCart = ItemQuantity
+                };
 
+                Cart.Add(item);
+            }
         }
 
         public bool CanRemoveFromCart
