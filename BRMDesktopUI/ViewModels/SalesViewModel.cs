@@ -141,8 +141,10 @@ namespace BRMDesktopUI.ViewModels
 
                 if (existingItem != null)
                 {
-                    existingItem.QuantityInCart += ItemQuantity;
-                    //in order to get the quantity property updated correctly in the cart
+                    existingItem.QuantityInCart += ItemQuantity;                    
+                    
+                    // hack in order to get the quantity property
+                     //updated correctly in the cart
                     Cart.Remove(existingItem);
                     Cart.Add(existingItem);
                 }
