@@ -14,18 +14,16 @@ namespace BRMDesktopUI.ViewModels
     {
         private IEventAggregator _events;
         private SalesViewModel _salesVM;
-        private SimpleContainer _container;
         public ShellViewModel( SalesViewModel salesVM,
-            IEventAggregator events, SimpleContainer container)
+            IEventAggregator events)
         {
             _events = events;
             _salesVM = salesVM;
-            _container = container;
 
             _events.Subscribe(this);
 
 
-            ActivateItemAsync(_container.GetInstance<LoginViewModel>());
+            ActivateItemAsync(IoC.Get<LoginViewModel>());
         }
 
         public Task HandleAsync(LogOnEvent message, CancellationToken cancellationToken)
