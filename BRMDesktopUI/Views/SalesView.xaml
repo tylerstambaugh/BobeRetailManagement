@@ -42,7 +42,7 @@
                         <StackPanel Orientation="horizontal">
                             <StackPanel Orientation="horizontal">
                                 <TextBlock Text="Price:" FontSize="14"/>
-                                <TextBlock Text="{Binding RetailPrice}" FontSize="14"/>
+                                <TextBlock Text="{Binding RetailPrice, StringFormat='{}{0:c}'}" FontSize="14"/>
                             </StackPanel>
                             <StackPanel Orientation="horizontal" Margin="5 0 0 0" >
                                 <TextBlock Text="Qty:" FontSize="14" />
@@ -97,3 +97,4 @@
 
     </Grid>
 </UserControl>
+
